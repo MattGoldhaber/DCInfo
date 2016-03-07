@@ -1,0 +1,22 @@
+## Interface: 60200
+## Title: DCInfo
+## Version: v0.1
+## SavedVariablesPerCharacter: DCItemLevelConfig
+## Author: Deathcuddles
+
+Localization\enUS.lua
+Localization\esES.lua
+Localization\esMX.lua
+Localization\deDE.lua
+Localization\ruRU.lua
+Localization\frFR.lua
+Localization\zhCN.lua
+Localization\zhTW.lua
+Localization\koKR.lua
+Localization\ptBR.lua
+Localization\itIT.lua
+
+libs\LibItemUpgradeInfo-1.0\LibItemUpgradeInfo-1.0.xml
+
+DCInfo.lua
+DCItemLevel.xml
