@@ -273,7 +273,7 @@ function DCItemLevelFrame_VARIABLES_LOADED()
 	local b1 = CreateFrame("CheckButton","Upgrades",ConfigPanel,"UICheckButtonTemplate");
 	b1:SetPoint("TOPLEFT",b,"BOTTOMLEFT",0,0);
 	b1:SetChecked(DCItemLevelConfig.upgrades);
-	_G[b1:GetName() .. "Text"]:SetText("Show upgrades, e.g. (4/4)");
+	_G[b1:GetName() .. "Text"]:SetText("Show upgrades, e.g. (2/2)");
 	b1:SetScript("OnClick", function(self, button, isDown) if ( self:GetChecked() ) then DCItemLevelConfig.upgrades = true; cleanUp(); else DCItemLevelConfig.upgrades = false; cleanUp(); end end)
 	
 	local b2 = CreateFrame("CheckButton","Char",ConfigPanel,"UICheckButtonTemplate");
