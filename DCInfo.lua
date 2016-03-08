@@ -477,14 +477,15 @@ function findItemInfo(who)
 	end
 	
 	local pvpilvl = tilvl + tilvlPvp;
+	pvpilvl = math.floor(pvpilvl / numItems);
 	local iLvlText;
 	
 	if (DCItemLevelConfig.PVP) then
 		if(pvpilvl < 700) then
-			pvpilvl = 700
+			pvpilvl = 700;
 		end
 		
-		iLvlText = "ilvl: ".."|cFFFFFF00"..math.floor(tilvl / numItems).."|cFFFFFFFF".." PvP: ".."|cFFFFFF00"..math.floor(pvpilvl / numItems);
+		iLvlText = "ilvl: ".."|cFFFFFF00"..math.floor(tilvl / numItems).."|cFFFFFFFF".." PvP: ".."|cFFFFFF00"..pvpilvl;
 	else
 		iLvlText = "ilvl: ".."|cFFFFFF00"..math.floor(tilvl / numItems);
 	end
