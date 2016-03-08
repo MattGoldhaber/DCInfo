@@ -17,7 +17,10 @@ local iconOffset = 18;
 local fontStyle = "SystemFont_Med1";
 local UpdateInProgress = false;
 local UpdateInProgressInspect = false;
+
+-- BB (mattg) I don't get why the fuck I have to declare this as a global instead of as a local
 ILvlTotal = CharacterFrame:CreateFontString("DCFrame_20", "OVERLAY", fontStyle);
+
 ilvlFrame:RegisterEvent("VARIABLES_LOADED");
 
 local OPvP = {"Interface/PVPFrame/UI-CHARACTER-PVP-ELEMENTS",460/512,1,0,75/512}
@@ -428,7 +431,7 @@ function findItemInfo(who)
 					_,_,_, color = GetItemQualityColor(quality);
 				end
 				
-				if (upgrade and DCItemLevelConfig.upgrades) then
+				if (upgrade and max and DCItemLevelConfig.upgrades) then
 					ActiveFontStrings[i]:SetText(ilvl .." ("..upgrade.."/"..max..")")
 				else
 					ActiveFontStrings[i]:SetText(ilvl)
@@ -474,8 +477,17 @@ function findItemInfo(who)
 	end
 	
 	local pvpilvl = tilvl + tilvlPvp;
+	local iLvlText;
 	
-	local iLvlText = "ilvl: ".."|cFFFFFF00"..math.floor(tilvl / numItems).."|cFFFFFFFF".." PvP: ".."|cFFFFFF00"..math.floor(pvpilvl / numItems);
+	if (DCItemLevelConfig.PVP) then
+		if(pvpilvl < 700) then
+			pvpilvl = 700
+		end
+		
+		iLvlText = "ilvl: ".."|cFFFFFF00"..math.floor(tilvl / numItems).."|cFFFFFFFF".." PvP: ".."|cFFFFFF00"..math.floor(pvpilvl / numItems);
+	else
+		iLvlText = "ilvl: ".."|cFFFFFF00"..math.floor(tilvl / numItems);
+	end
 	
 	if(who == "player") then
 		IlvlTotal:SetText(iLvlText);
@@ -508,30 +520,16 @@ function getEnchant(i,itemlink)
 
 	local enchantID;
 	
-	--if(enchantInfo) then
- 	--	local _, _, Color, Ltype, Id, Enchant, Gem1, Gem2, Gem3, Gem4, Suffix, Unique, LinkLvl, Name =  string.find(itemlink,"|?c?f?f?(%x*)|?H?([^:]*):?(%d+):?(%d*):?(%d*):?(%d*):?(%d*):?(%d*):?(%-?%d*):?(%-?%d*):?(%d*):?(%d*):?(%-?%d*)|?h?%[?([^%[%]]*)%]?|?h?|?r?")
-	--	enchantID = Enchant;
-	--end
-	
 	--Did we find any enchants?
 	if(enchantInfo) then
 		ActiveEnchantIcons[i].texture:SetTexture("INTERFACE/ICONS/INV_Jewelry_Talisman_08");
 		ActiveEnchantIcons[i].texture:SetAlpha(1.0);
-		
-		--if(enchantID == "4442") then
-		--	ActiveEnchantIcons[i]:SetScript("OnEnter",function(s,m)
-		--		GameTooltip:SetOwner(UIParent, "ANCHOR_CURSOR");
-		--		GameTooltip:SetHyperlink("item:74724:0:0:0:0:0:0:0");		
-		--		GameTooltip:Show(); 
-		--		end);
-		--else
-			ActiveEnchantIcons[i]:SetScript("OnEnter",function(s,m)
-				GameTooltip:SetOwner(UIParent, "ANCHOR_CURSOR");
-				GameTooltip:ClearLines();
-				GameTooltip:AddLine(enchantInfo);
-				GameTooltip:Show(); 
-				end);
-		--end
+		ActiveEnchantIcons[i]:SetScript("OnEnter",function(s,m)
+			GameTooltip:SetOwner(UIParent, "ANCHOR_CURSOR");
+			GameTooltip:ClearLines();
+			GameTooltip:AddLine(enchantInfo);
+			GameTooltip:Show(); 
+			end);
 		ActiveEnchantIcons[i]:SetScript("OnLeave",function(s,m)
 			GameTooltip:Hide(); 
 			end);
