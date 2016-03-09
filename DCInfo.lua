@@ -14,7 +14,7 @@ local ItemUpgradeInfo = LibStub("LibItemUpgradeInfo-1.0");
 local ilvlFrame = CreateFrame("frame");
 local iconSize = 16;
 local iconOffset = 18;
-local fontStyle = "SystemFont_Med1";
+local fontStyle = "SystemFont_Shadow_Med1";
 local UpdateInProgress = false;
 local UpdateInProgressInspect = false;
 
@@ -310,7 +310,7 @@ function DCItemLevelFrame_VARIABLES_LOADED()
 	b6:SetScript("OnClick", function(self, button, isDown) if ( self:GetChecked() ) then DCItemLevelConfig.PVP = true; cleanUp(); else DCItemLevelConfig.PVP = false; cleanUp(); end end)
 	
 	if(DCItemLevelConfig.Small) then
-		fontStyle = "SystemFont_Small";
+		fontStyle = "SystemFont_Shadow_Small";
 	end
 	createFontStrings();
 	createInspectFontStrings();
